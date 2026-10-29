@@ -1,0 +1,12 @@
+name: Codegen generation For Dev
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        required: false
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo stub
