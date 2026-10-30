@@ -1,0 +1,92 @@
+name: Codegen generation For Dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Optional Run ID for specific artifact. Leave blank to use from the latest webapp deployment."
+        required: false
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate unique branch name
+        run: |
+          BRANCH_NAME="dev_$(date +'%Y%m%d%H%M%S')"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "NPM_VERSION=0.0.0-${BRANCH_NAME//_/-}" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Create and checkout unique branch
+        run: |
+          git checkout -b ${{ env.BRANCH_NAME }}
+
+      - name: Download the swagger spec
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          repo: ${{ secrets.REPO }}
+          github_token: ${{ secrets.ARTIFACT_READ_ONLY }}
+          run_id: ${{ github.event.inputs.run_id || '' }}
+          workflow: statflo-webapp-deploy.yaml
+          name: webapp-artifact
+          path: ./webapp-artifact/
+          workflow_conclusion: success
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Generate code from Swagger file
+        run: |
+          rm -rf src docs
+
+          npx openapi-generator-cli generate -i ./webapp-artifact/nelmio-spec.json -g typescript-fetch -o . -t ./templates \
+          --additional-properties=npmName=@statflo/statflo-typescript-sdk,npmVersion=${{ env.NPM_VERSION }},releaseVersion=${{ env.RELEASE_VERSION }} \
+          --skip-validate-spec
+
+          npm pkg set version=${{ env.NPM_VERSION }}
+          npm install --package-lock-only --ignore-scripts
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit and Push to unique branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Generate SDK for Dev (version: ${{ env.RELEASE_VERSION }})"
+          git push origin ${{ env.BRANCH_NAME }}
+
+      - name: Deployment Summary
+        if: success()
+        run: |
+          cat <<SUMMARY >> $GITHUB_STEP_SUMMARY
+          ## 🚀 Deployment Summary
+
+          | Property | Value |
+          |----------|--------|
+          | Branch | ${{ env.BRANCH_NAME }} |
+
+          ### 📦 npm Dependency
+
+          \`\`\`json
+          "@statflo/statflo-typescript-sdk": "github:Statflo/statflo-typescript-sdk#${{ env.BRANCH_NAME }}"
+          \`\`\`
+          SUMMARY
