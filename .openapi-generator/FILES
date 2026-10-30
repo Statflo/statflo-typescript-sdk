@@ -103,6 +103,11 @@ docs/ContactActionCreate.md
 docs/ContactActionPaginationResponse.md
 docs/ContactActionUpdate.md
 docs/ContactApi.md
+docs/ContactConsentLog.md
+docs/ContactConsentLogApi.md
+docs/ContactConsentLogCreate.md
+docs/ContactConsentLogPaginationResponse.md
+docs/ContactConsentLogUpdate.md
 docs/ContactCreate.md
 docs/ContactPaginationResponse.md
 docs/ContactUpdate.md
@@ -146,7 +151,6 @@ docs/DealerPaginationResponse.md
 docs/DealerStatus.md
 docs/DealerStatusPaginationResponse.md
 docs/DealerUpdate.md
-docs/DefaultApi.md
 docs/District.md
 docs/DistrictApi.md
 docs/DistrictCreate.md
@@ -361,6 +365,7 @@ src/apis/CarrierApi.ts
 src/apis/CarrierStatisticApi.ts
 src/apis/ContactActionApi.ts
 src/apis/ContactApi.ts
+src/apis/ContactConsentLogApi.ts
 src/apis/ContentSharingCategoryApi.ts
 src/apis/ContentSharingLinkApi.ts
 src/apis/ContentSharingRecommendApi.ts
@@ -369,7 +374,6 @@ src/apis/DealerAllowedFeatureApi.ts
 src/apis/DealerApi.ts
 src/apis/DealerExternalIdApi.ts
 src/apis/DealerMetadataApi.ts
-src/apis/DefaultApi.ts
 src/apis/DistrictApi.ts
 src/apis/EWCAcceptanceApi.ts
 src/apis/EmailActivityApi.ts
@@ -488,6 +492,10 @@ src/models/ContactAction.ts
 src/models/ContactActionCreate.ts
 src/models/ContactActionPaginationResponse.ts
 src/models/ContactActionUpdate.ts
+src/models/ContactConsentLog.ts
+src/models/ContactConsentLogCreate.ts
+src/models/ContactConsentLogPaginationResponse.ts
+src/models/ContactConsentLogUpdate.ts
 src/models/ContactCreate.ts
 src/models/ContactPaginationResponse.ts
 src/models/ContactUpdate.ts
