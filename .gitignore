@@ -1,0 +1,10 @@
+wwwroot/*.js
+node_modules
+typings
+dist
+
+# downloaded swagger spec (CI)
+webapp-artifact/
+
+.DS_Store
+.idea
