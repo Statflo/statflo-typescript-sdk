@@ -1,0 +1,46 @@
+
+# CampaignMetadata
+
+
+## Properties
+
+Name | Type
+------------ | -------------
+`id` | number
+`carrier` | [Carrier](Carrier.md)
+`dealer` | [Dealer](Dealer.md)
+`campaign` | [Campaign](Campaign.md)
+`metadata` | string
+`value` | object
+`dateAdded` | Date
+
+## Example
+
+```typescript
+import type { CampaignMetadata } from '@statflo/statflo-typescript-sdk'
+
+// TODO: Update the object below with actual values
+const example = {
+  "id": null,
+  "carrier": null,
+  "dealer": null,
+  "campaign": null,
+  "metadata": null,
+  "value": null,
+  "dateAdded": null,
+} satisfies CampaignMetadata
+
+console.log(example)
+
+// Convert the instance to a JSON string
+const exampleJSON: string = JSON.stringify(example)
+console.log(exampleJSON)
+
+// Parse the JSON string back to an object
+const exampleParsed = JSON.parse(exampleJSON) as CampaignMetadata
+console.log(exampleParsed)
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
