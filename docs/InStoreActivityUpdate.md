@@ -1,0 +1,66 @@
+
+# InStoreActivityUpdate
+
+
+## Properties
+
+Name | Type
+------------ | -------------
+`messageTo` | string
+`messageFrom` | string
+`subject` | string
+`actionTaken` | string
+`description` | string
+`nextSteps` | string
+`nextDate` | Date
+`outcomeReason` | string
+`outcomeLocation` | string
+`id` | number
+`type` | number
+`accountId` | string
+`dateAdded` | Date
+`dateCreated` | Date
+`dateUpdated` | Date
+`recordSource` | string
+`recordOwned` | number
+
+## Example
+
+```typescript
+import type { InStoreActivityUpdate } from '@statflo/statflo-typescript-sdk'
+
+// TODO: Update the object below with actual values
+const example = {
+  "messageTo": null,
+  "messageFrom": null,
+  "subject": null,
+  "actionTaken": null,
+  "description": null,
+  "nextSteps": null,
+  "nextDate": null,
+  "outcomeReason": null,
+  "outcomeLocation": null,
+  "id": null,
+  "type": null,
+  "accountId": null,
+  "dateAdded": null,
+  "dateCreated": null,
+  "dateUpdated": null,
+  "recordSource": null,
+  "recordOwned": null,
+} satisfies InStoreActivityUpdate
+
+console.log(example)
+
+// Convert the instance to a JSON string
+const exampleJSON: string = JSON.stringify(example)
+console.log(exampleJSON)
+
+// Parse the JSON string back to an object
+const exampleParsed = JSON.parse(exampleJSON) as InStoreActivityUpdate
+console.log(exampleParsed)
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
