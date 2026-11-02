@@ -1,6 +1,6 @@
 {
   "name": "@statflo/statflo-typescript-sdk",
-  "version": "4.1.214",
+  "version": "4.1.219",
   "description": "OpenAPI client for @statflo/statflo-typescript-sdk",
   "author": "Statflo",
   "repository": {
